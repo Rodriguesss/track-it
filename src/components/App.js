@@ -5,10 +5,11 @@ import { Style } from "../css/style"
 
 import Context from "./generics/Context"
 
-import Today from './pages/Today'
-import Habits from "./pages/Habits"
 import Login from "./pages/Index/Login"
 import Register from "./pages/Index/Register"
+import Today from './pages/Today'
+import Habits from "./pages/Habits"
+import Historic from "./pages/Historic"
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="/cadastro" element={<Register />} />
             <Route path="/hoje" element={<Today />} />
             <Route path="/habitos" element={<Habits />} />
+            <Route path="/historico" element={<Historic />} />
           </Routes>
         </BrowserRouter>
       </Context>
