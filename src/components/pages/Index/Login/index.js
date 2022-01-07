@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import Loader from "react-loader-spinner";
+
 import axios from "axios"
 
 import { Container } from '../style'
@@ -21,19 +23,35 @@ export default function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  function login() {
-    const request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login`, {
-      email: email,
-      password: password
-    });
+  const [buttonValue, setButtonValue] = useState("Entrar")
+  const [buttonColor, setButtonColor] = useState("#52B6FF")
+  const [disabled, setDisabled] = useState(false)
 
-    request.then(() => {
-      navigate('/hoje')
-    })
+  function login(event) {
+    setButtonValue(<Loader type="ThreeDots" color="#FFFFFF" height={10} width={80} timeout={3000} />)
+    setDisabled(true)
+    setButtonColor("#52B6FFbb")
 
-    request.catch((erro) => {
-      console.log(erro)
-    })
+    event.preventDefault()
+
+    setTimeout(() => {
+      const request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login`, {
+        email: email,
+        password: password
+      });
+
+      request.then(() => {
+        navigate('/hoje')
+      })
+
+      request.catch((error) => {
+        alert('Erro ao logar com usuário: ' + error.response.data.message)
+
+        setButtonValue("Entrar")
+        setDisabled(false)
+        setButtonColor("#52B6FF")
+      })
+    }, 2000)
   }
 
   return (
@@ -41,10 +59,10 @@ export default function Login() {
       <ImageLogo src={Images["Logo"]} width="178" height="180" />
 
       <Form onSubmit={login}>
-        <InputForm type="email" placeholder="email" value={email} setAttribute={setEmail} />
-        <InputForm type="password" placeholder="senha" value={password} setAttribute={setPassword} />
+        <InputForm type="email" placeholder="email" value={email} setAttribute={setEmail} disabled={disabled} />
+        <InputForm type="password" placeholder="senha" value={password} setAttribute={setPassword} disabled={disabled} />
 
-        <Button width="80" value="Entrar" type="submit" />
+        <Button width="100" value={buttonValue} disabled={disabled} type="submit" color={buttonColor} />
       </Form>
 
       <LinkToogle register={true} path="/cadastro" />

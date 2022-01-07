@@ -5,7 +5,7 @@ export const ButtonStyle = styled.button`
 
   padding: 10px;
 
-  background-color: #52B6FF;
+  background-color: ${({color}) => color};
 
   color: #FFF;
   font-size: 20,98px;

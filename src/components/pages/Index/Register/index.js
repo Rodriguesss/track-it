@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import Loader from "react-loader-spinner";
 
 import axios from 'axios'
 
@@ -15,26 +18,44 @@ import Button from '../../../atomics/Button'
 import LinkToogle from '../../../atomics/LinkToogle'
 
 export default function Register() {
+  const navigate = useNavigate()
+
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [name, setName] = useState("")
   const [photo, setPhoto] = useState("")
 
-  function register() {
-    const request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up`, {
-      email: email,
-      name: name,
-      image: photo,
-      password: password
-    });
+  const [buttonValue, setButtonValue] = useState("Cadastrar")
+  const [buttonColor, setButtonColor] = useState("#52B6FF")
+  const [disabled, setDisabled] = useState(false)
 
-    request.then((response) => {
-      console.log(response)
-    })
+  function register(event) {
+    setButtonValue(<Loader type="ThreeDots" color="#FFFFFF" height={10} width={80} timeout={3000} />)
+    setDisabled(true)
+    setButtonColor("#52B6FFbb")
 
-    request.catch((erro) => {
-      console.log(erro)
-    })
+    event.preventDefault()
+
+    setTimeout(() => {
+      const request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up`, {
+        email: email,
+        name: name,
+        image: photo,
+        password: password
+      });
+
+      request.then(() => {
+        navigate('/')
+      })
+
+      request.catch((error) => {
+        alert('Erro ao cadastrar usuário: ' + error.response.data.message)
+
+        setButtonValue("Cadastrar")
+        setDisabled(false)
+        setButtonColor("#52B6FF")
+      })
+    }, 2000)
   }
 
   return (
@@ -42,12 +63,12 @@ export default function Register() {
       <ImageLogo src={Images["Logo"]} width="178" height="180" />
 
       <Form onSubmit={register}>
-        <InputForm type="email" placeholder="email" value={email} setAttribute={setEmail} />
-        <InputForm type="password" placeholder="senha" value={password} setAttribute={setPassword} />
-        <InputForm type="text" placeholder="nome" value={name} setAttribute={setName} />
-        <InputForm type="text" placeholder="foto" value={photo} setAttribute={setPhoto} />
+        <InputForm type="email" placeholder="email" value={email} setAttribute={setEmail} disabled={disabled} />
+        <InputForm type="password" placeholder="senha" value={password} setAttribute={setPassword} disabled={disabled} />
+        <InputForm type="text" placeholder="nome" value={name} setAttribute={setName} disabled={disabled} />
+        <InputForm type="text" placeholder="foto" value={photo} setAttribute={setPhoto} disabled={disabled} />
 
-        <Button width="80" value="Cadastrar" />
+        <Button width="100" value={buttonValue} disabled={disabled} type="submit" color={buttonColor} />
       </Form>
 
       <LinkToogle register={false} path="/" />
