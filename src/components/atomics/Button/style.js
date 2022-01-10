@@ -12,4 +12,6 @@ export const ButtonStyle = styled.button`
   text-align: center;
 
   border-radius: 4.64px;
+
+  cursor: pointer;
 `

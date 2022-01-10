@@ -10,3 +10,14 @@ export const Message = styled.p`
 
   margin: 20px 0;
 `
+
+export const HeaderFormHabit = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+`
+
+export const ContainerCard = styled.div`
+  ${({opacity}) => opacity === "0" && "margin-top: -220px;"}
+`

@@ -4,20 +4,23 @@ import UserContext from "../../../utils/context/UserContext"
 
 import axios from 'axios'
 
-import { Message } from './style'
+import { ContainerCard, HeaderFormHabit, Message } from './style'
 
 import Title from "../../atomics/Title"
 import Container from "../../generics/Container"
 import Header from "../../generics/Header"
 import Navbar from "../../generics/Navbar"
+import FormHabit from "../../generics/FormHabit"
+import CardHabit from "../../generics/CardHabit"
+import Button from "../../atomics/Button"
 
 export default function Habits() {
   const { data } = useContext(UserContext)
 
-  /*const [objNewHabit, setobjNewHabit] = useState({
-    name: "",
-    days: []
-  })*/
+  const [refresh, setRefresh] = useState(false)
+  const [habitName, setHabitName] = useState("")
+  const [habitDays, setHabitDays] = useState([])
+  const [opacity, setOpacity] = useState("1")
 
   const [habits, setHabits] = useState([])
 
@@ -29,40 +32,30 @@ export default function Habits() {
     })
 
     request.then((response) => {
-      console.log(response)
       setHabits(response.data)
     })
-  }, [data])
-
-  /*function addHabit(event) {
-    event.preventDefault()
-
-    const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", objNewHabit, {
-      headers: {
-        Authorization: `Bearer ${token.token}`
-      }
-    })
-
-    request.then((response) => {
-      console.log(response)
-    });
-
-    request.catch((error) => {
-      console.log(error)
-    })
-  }*/
+  }, [data, refresh])
 
   return (
     <>
       <Header />
       <Container>
-        <Title>Meus hábitos</Title>
-        {habits.length === 0
-          ? <Message>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Message>
-          : habits.map((history) => (
-            console.log(history)
-          ))
-        }
+        <HeaderFormHabit>
+          <Title>Meus hábitos</Title>
+          <Button width="10" value="+" color="#52B6FF" type="button" setOpacity={setOpacity} />
+        </HeaderFormHabit>
+
+        <FormHabit value={habitName} setAttribute={setHabitName} habitDays={habitDays} setHabitDays={setHabitDays}
+          refresh={refresh} setRefresh={setRefresh} opacity={opacity} setOpacity={setOpacity} />
+
+        <ContainerCard opacity={opacity}>
+          {habits.length === 0
+            ? <Message>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Message>
+            : habits.map(({ id, name, days }) => (
+              <CardHabit key={id} id={id} title={name} arrayDays={days} refresh={refresh} setRefresh={setRefresh} />
+            ))
+          }
+        </ContainerCard>
       </Container>
       <Navbar />
     </>

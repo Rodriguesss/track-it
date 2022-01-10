@@ -13,7 +13,7 @@ import ImageLogo from '../../../atomics/ImageLogo'
 import { Images } from '../../../../utils/img/images_import'
 
 import Form from '../../../generics/Form'
-import InputForm from '../../../atomics/Input'
+import InputForm from '../../../atomics/InputForm'
 
 import Button from '../../../atomics/Button'
 
@@ -63,7 +63,7 @@ export default function Login() {
     <Container>
       <ImageLogo src={Images["Logo"]} width="178" height="180" />
 
-      <Form onSubmit={login}>
+      <Form onSubmit={login} width="80">
         <InputForm type="email" placeholder="email" value={email} setAttribute={setEmail} disabled={disabled} />
         <InputForm type="password" placeholder="senha" value={password} setAttribute={setPassword} disabled={disabled} />
 
