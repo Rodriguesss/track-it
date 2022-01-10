@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+
+import UserContext from "../../../utils/context/UserContext"
 
 import axios from 'axios'
 
@@ -11,19 +13,21 @@ import Header from "../../generics/Header"
 import Navbar from "../../generics/Navbar"
 
 export default function Historic() {
+  const { data } = useContext(UserContext);
+
   const [historics, setHistorics] = useState([])
 
   useEffect(() => {
     const request = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/history/daily", {
       headers: {
-        "Authorization": `Bearer ${"token"}`
+        "Authorization": `Bearer ${data.token}`
       }
     })
 
     request.then((response) => {
       setHistorics(response)
     })
-  }, [])
+  }, [data])
 
   return (
     <>

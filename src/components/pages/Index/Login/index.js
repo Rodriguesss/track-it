@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+import UserContext from "../../../../utils/context/UserContext"
 
 import Loader from "react-loader-spinner";
 
@@ -19,6 +21,8 @@ import LinkToogle from '../../../atomics/LinkToogle'
 
 export default function Login() {
   const navigate = useNavigate()
+
+  const { setData } = useContext(UserContext);
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -40,7 +44,8 @@ export default function Login() {
         password: password
       });
 
-      request.then(() => {
+      request.then((response) => {
+        setData(response.data)
         navigate('/hoje')
       })
 
