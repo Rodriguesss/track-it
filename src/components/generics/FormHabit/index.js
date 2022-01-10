@@ -43,14 +43,14 @@ export default function FormHabit({ value, setAttribute, habitDays, setHabitDays
       })
     }, 2000)
 
-}
-return (
-  <FormHabitStyle opacity={opacity}>
-    <Form onSubmit={addHabit} width="100">
-      <InputForm type="text" placeholder="nome do hábito" value={value} setAttribute={setAttribute} disabled={disabled} />
-      <WeekDay habitDays={habitDays} setHabitDays={setHabitDays} />
-      <OptionFormHabit disabled={disabled} setOpacity={setOpacity} opacity={opacity} />
-    </Form>
-  </FormHabitStyle>
-)
+  }
+  return (
+    <FormHabitStyle opacity={opacity}>
+      <Form onSubmit={addHabit} width="100">
+        <InputForm type="text" placeholder="nome do hábito" value={value} setAttribute={setAttribute} disabled={disabled} />
+        <WeekDay habitDays={habitDays} setHabitDays={setHabitDays} />
+        <OptionFormHabit disabled={disabled} setOpacity={setOpacity} opacity={opacity} />
+      </Form>
+    </FormHabitStyle>
+  )
 }

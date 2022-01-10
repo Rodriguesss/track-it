@@ -1,4 +1,4 @@
-import { useState } from "react/cjs/react.development"
+import { useState } from "react"
 import Day from "../../atomics/Day"
 import { WeekDaysStyle } from "./style"
 

@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const Message = styled.p`
+const Message = styled.p`
   width: 100%;
 
   font-size: 17.98px;
@@ -11,13 +11,19 @@ export const Message = styled.p`
   margin: 20px 0;
 `
 
-export const HeaderFormHabit = styled.div`
+const HeaderFormHabit = styled.div`
   display: flex;
   justify-content: space-between;
 
   width: 100%;
 `
 
-export const ContainerCard = styled.div`
+const ContainerCard = styled.div`
   ${({opacity}) => opacity === "0" && "margin-top: -220px;"}
 `
+
+export {
+  Message,
+  HeaderFormHabit,
+  ContainerCard
+}
