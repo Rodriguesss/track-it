@@ -16,12 +16,11 @@ import 'dayjs/locale/pt-br'
 import HabitStatus from "../../atomics/HabitStatus"
 
 export default function Today() {
-  const { data } = useContext(UserContext);
+  const { data, percentage, setPercentage } = useContext(UserContext);
 
   const [habits, setHabits] = useState([])
   const [habitsDone, setHabitsDone] = useState(0)
   const [refresh, setRefresh] = useState(false)
-  const [percentage, setPercentage] = useState()
 
   useEffect(() => {
     const request = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today`, {
@@ -40,6 +39,11 @@ export default function Today() {
     // eslint-disable-next-line
   }, [refresh]);
 
+  function handlePercentage() {
+    return Math.round((100 / habits.length) * habitsDone)
+  }
+
+  setPercentage(handlePercentage())
 
   return (
 
@@ -49,7 +53,7 @@ export default function Today() {
         <Title>{dayjs().locale('pt-br').format('dddd, DD/MM')}</Title>
         {habitsDone === 0
           ? <HabitStatus color="#BABABA">Nenhum hábito concluído ainda</HabitStatus>
-          : <HabitStatus color="#8FC549">`{Math.round((100 / habits.length) * habitsDone)}% dos hábitos concluídos</HabitStatus>
+          : <HabitStatus color="#8FC549">`{percentage}% dos hábitos concluídos</HabitStatus>
         }
         {habits.length === 0
           ? <Message>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Message>
