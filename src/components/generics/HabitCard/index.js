@@ -1,4 +1,4 @@
-import TitleCardHabit from "../../atomics/TitleCardHabit";
+import TitleCard from "../../atomics/TitleCard";
 import WeekDay from "../WeekDays";
 
 import { Images } from "../../../utils/img/images_import";
@@ -11,7 +11,7 @@ export default function CardHabit({ id, title, arrayDays, refresh, setRefresh })
   return (
     <CardHabitStyle>
       <HeaderCardHabit>
-        <TitleCardHabit>{title}</TitleCardHabit>
+        <TitleCard>{title}</TitleCard>
         <IconTrash id={id} src={Images["IconTrash"]} refresh={refresh} setRefresh={setRefresh} />
       </HeaderCardHabit>
       <WeekDay disabled={true} arrayDays={arrayDays} />

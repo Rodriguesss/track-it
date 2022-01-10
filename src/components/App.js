@@ -16,6 +16,7 @@ import Historic from "./pages/Historic"
 
 export default function App() {
   const [data, setData] = useState([])
+  const [percentage, setPercentage] = useState([])
 
   return (
     <>
@@ -23,7 +24,7 @@ export default function App() {
       <Style />
       <Context>
         <BrowserRouter>
-          <UserContext.Provider value={{ data, setData }}>
+          <UserContext.Provider value={{ data, setData, percentage, setPercentage }}>
             <Routes>
               <Route path="/" element={<Login setData={setData} />} />
               <Route path="/cadastro" element={<Register />} />

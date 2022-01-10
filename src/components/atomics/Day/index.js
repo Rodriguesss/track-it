@@ -3,8 +3,7 @@ import { useEffect, useState } from "react"
 import { DayStyle } from "./style"
 
 export default function Day({ letter, array, setArray, index, disabled, arrayDays }) {
-  console.log('array', array)
-
+  
   const [colors] = useState({
     selectedColor: { color: "#FFFFFF", backgroundColor: "#CFCFCF" },
     defaultColor: { color: "#DBDBDB", backgroundColor: "#FFFFFF" }

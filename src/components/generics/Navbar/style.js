@@ -11,6 +11,7 @@ const NavbarStyle = styled.nav`
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   position: fixed;
   bottom: 0;
@@ -20,14 +21,23 @@ const NavbarStyle = styled.nav`
 
   width: 100%;
 
-  padding: 20px 40px;
+  padding: 0 40px;
 
   a {
     text-decoration: none;
   }
 `
 
+const ProgressBar = styled.div`
+    position: relative;
+    bottom: 20px;
+    
+    width: 91px;
+    height: 91px;
+}`
+
 export {
   NavbarStyle,
-  Option
+  Option,
+  ProgressBar
 }

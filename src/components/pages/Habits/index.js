@@ -11,7 +11,7 @@ import Container from "../../generics/Container"
 import Header from "../../generics/Header"
 import Navbar from "../../generics/Navbar"
 import FormHabit from "../../generics/FormHabit"
-import CardHabit from "../../generics/CardHabit"
+import CardHabit from "../../generics/HabitCard"
 import Button from "../../atomics/Button"
 
 export default function Habits() {
@@ -21,7 +21,6 @@ export default function Habits() {
   const [habitName, setHabitName] = useState("")
   const [habitDays, setHabitDays] = useState([])
   const [opacity, setOpacity] = useState("1")
-
   const [habits, setHabits] = useState([])
 
   useEffect(() => {
