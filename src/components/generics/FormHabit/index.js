@@ -34,7 +34,6 @@ export default function FormHabit({ value, setAttribute, habitDays, setHabitDays
         setDisabled(false)
         setRefresh(!refresh)
         setAttribute("")
-        setHabitDays([])
         setReload(!reload)
       });
 
