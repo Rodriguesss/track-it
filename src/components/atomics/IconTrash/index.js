@@ -5,7 +5,7 @@ import axios from 'axios'
 
 import { IconTrashStyle } from "./style"
 
-export default function IconTrash({ id, src, refresh, setRefresh }) {
+export default function IconTrash({ id, src, refresh, setRefresh, setReload, reload }) {
   const { data } = useContext(UserContext)
 
   function removeHabit(id) {
@@ -20,6 +20,7 @@ export default function IconTrash({ id, src, refresh, setRefresh }) {
 
       request.then(() => {
         setRefresh(!refresh)
+        setReload(!reload)
       });
 
       request.catch((error) => {

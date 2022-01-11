@@ -10,7 +10,7 @@ import InputForm from "../../atomics/InputForm"
 import WeekDay from "../WeekDays"
 import OptionFormHabit from "../OptionFormHabit"
 
-export default function FormHabit({ value, setAttribute, habitDays, setHabitDays, refresh, setRefresh, opacity, setOpacity }) {
+export default function FormHabit({ value, setAttribute, habitDays, setHabitDays, refresh, setRefresh, opacity, setOpacity, setReload, reload }) {
   const { data } = useContext(UserContext)
 
   const [disabled, setDisabled] = useState(false)
@@ -35,6 +35,7 @@ export default function FormHabit({ value, setAttribute, habitDays, setHabitDays
         setRefresh(!refresh)
         setAttribute("")
         setHabitDays([])
+        setReload(!reload)
       });
 
       request.catch((error) => {
@@ -42,8 +43,10 @@ export default function FormHabit({ value, setAttribute, habitDays, setHabitDays
         alert(error)
       })
     }, 2000)
-
   }
+
+  
+
   return (
     <FormHabitStyle opacity={opacity}>
       <Form onSubmit={addHabit} width="100">
